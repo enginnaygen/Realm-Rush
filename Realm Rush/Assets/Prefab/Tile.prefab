@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (2, 2)
+  m_text: (0, 0)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -109,8 +109,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281808852
-  m_fontColor: {r: 0.8301887, g: 0.2145959, b: 0.2145959, a: 1}
+    rgba: 4279111185
+  m_fontColor: {r: 0.066037714, g: 0.056318957, b: 0.056318957, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 1129183746584863101}
   - component: {fileID: 4507558434353628649}
   m_Layer: 0
-  m_Name: GrassMesh
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
