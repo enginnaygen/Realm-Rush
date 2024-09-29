@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] bool isPlacable;
+    private void OnMouseDown()
     {
-        
+        if(isPlacable)
+        {
+            Debug.Log(gameObject.name);
+
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //private void OnMouseOver()
+    //{
+    //    Debug.Log(gameObject.name);
+    //}
 }
