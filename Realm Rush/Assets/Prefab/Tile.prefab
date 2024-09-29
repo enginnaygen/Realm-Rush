@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlacable: 1
+  balista: {fileID: 4582689816258681358, guid: 2611a7b2c8b18824aa1eb234e1768978, type: 3}
 --- !u!65 &6214233545461358815
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -6,18 +6,17 @@ public class Waypoint : MonoBehaviour
 {
 
     [SerializeField] bool isPlacable;
+    [SerializeField] GameObject balista;
+
     private void OnMouseDown()
     {
         if(isPlacable)
         {
-            Debug.Log(gameObject.name);
+            Instantiate(balista, transform.position, Quaternion.identity);
+            isPlacable = false;
 
         }
 
     }
 
-    //private void OnMouseOver()
-    //{
-    //    Debug.Log(gameObject.name);
-    //}
 }
