@@ -8,7 +8,26 @@ public class EnemyMover : MonoBehaviour
     [Range(0,10)] [SerializeField] float speed = 1f;
     void Start()
     {
+        PathFinding();
+        ReturnToStart();
         StartCoroutine(FallowPath());
+    }
+
+    void ReturnToStart()
+    {
+        transform.position = path[0].transform.position;
+    }
+
+    void PathFinding()
+    {
+        path.Clear();
+
+        GameObject parent = GameObject.FindGameObjectWithTag("Path");
+
+        foreach (Transform child in parent.transform)
+        {
+            path.Add(child.GetComponentInChildren<Waypoint>());
+        }
     }
 
     IEnumerator FallowPath()
@@ -28,9 +47,9 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
 
-            // transform.position = waypoint.transform.position;
-            //yield return new WaitForSeconds(waitTime);
         }
+
+        Destroy(gameObject); //yolunu bitirince kendini yok ediyor
     }
 
 
