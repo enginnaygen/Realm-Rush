@@ -13,7 +13,9 @@ public class EnemyHealth : MonoBehaviour
 
         if(currentHitPoint >= maxHitPoints)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            currentHitPoint = 0;
+            gameObject.SetActive(false);
         }
     }
 }
