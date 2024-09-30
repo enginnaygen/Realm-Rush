@@ -24,9 +24,7 @@ public class ObjectPool : MonoBehaviour
         pool = new GameObject[poolSize];
 
         for (int i = 0; i < pool.Length; i++)
-        {
-            //GameObject enemymember = Instantiate(enemy, transform);
-            //pool[i] = enemymember;
+        {         
             pool[i] = Instantiate(enemy, transform);
             pool[i].SetActive(false);
 

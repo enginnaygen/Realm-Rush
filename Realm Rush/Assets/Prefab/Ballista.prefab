@@ -215,6 +215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   weapon: {fileID: 4021825816119650570}
+  projectilePartical: {fileID: 866190651506973025}
+  rannge: 15
 --- !u!1 &5344846439736784401
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +323,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
