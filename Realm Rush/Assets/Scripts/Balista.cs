@@ -9,9 +9,7 @@ public class Balista : MonoBehaviour
     public bool InstantiateTower(Balista balista,Transform tile)
     {
         Bank bank;
-        UI ui;
         bank = FindObjectOfType<Bank>();
-        ui = FindObjectOfType<UI>();
 
 
 
@@ -24,7 +22,6 @@ public class Balista : MonoBehaviour
         {
             Instantiate(balista, tile.position, Quaternion.identity);
             bank.Withdraw(balistaCost);
-            ui.UpdeteGoldText();
             return true;
         }
 
