@@ -7,6 +7,12 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
     [Range(0,10)] [SerializeField] float speed = 1f;
 
+    Enemy enemy;
+
+    private void Start()
+    {
+        enemy = GetComponent<Enemy>();
+    }
     void OnEnable()
     {
         PathFinding();
@@ -50,6 +56,7 @@ public class EnemyMover : MonoBehaviour
 
         }
 
+        enemy.LoseMoney();
         //Destroy(gameObject); //yolunu bitirince kendini yok ediyor
         gameObject.SetActive(false);
         //transform.localPosition = Vector3.zero;
