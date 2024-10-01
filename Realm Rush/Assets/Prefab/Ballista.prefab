@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ba36aebac79234986bf2546b10440e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 50
+  balistaCost: 10
 --- !u!1 &5344846439736784401
 GameObject:
   m_ObjectHideFlags: 0

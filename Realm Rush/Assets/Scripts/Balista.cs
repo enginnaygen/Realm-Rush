@@ -5,12 +5,14 @@ using UnityEngine;
 public class Balista : MonoBehaviour
 {
     [SerializeField] int balistaCost = 50;
-    
 
     public bool InstantiateTower(Balista balista,Transform tile)
     {
         Bank bank;
+        UI ui;
         bank = FindObjectOfType<Bank>();
+        ui = FindObjectOfType<UI>();
+
 
 
         if (bank == null)
@@ -22,6 +24,7 @@ public class Balista : MonoBehaviour
         {
             Instantiate(balista, tile.position, Quaternion.identity);
             bank.Withdraw(balistaCost);
+            ui.UpdeteGoldText();
             return true;
         }
 
