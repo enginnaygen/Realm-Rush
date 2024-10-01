@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  speed: 1
+  speed: 0.5
 --- !u!65 &1899053846372164715
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHitPoints: 5
-  currentHitPoint: 0
+  difficultyRamp: 1
 --- !u!114 &3232626481461181612
 MonoBehaviour:
   m_ObjectHideFlags: 0

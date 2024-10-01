@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
@@ -33,10 +35,23 @@ public class EnemyMover : MonoBehaviour
 
         foreach (Transform child in parent.transform)
         {
-            path.Add(child.GetComponentInChildren<Waypoint>());
+            Waypoint waypoint = child.GetComponentInChildren<Waypoint>();
+
+            if(waypoint!=null)
+            {
+                path.Add(waypoint);
+
+            }
         }
     }
 
+
+    void FinishPath()
+    {
+        enemy.LoseMoney();
+        gameObject.SetActive(false);
+
+    }
     IEnumerator FallowPath()
     {
         foreach (Waypoint waypoint in path)
@@ -56,10 +71,7 @@ public class EnemyMover : MonoBehaviour
 
         }
 
-        enemy.LoseMoney();
-        //Destroy(gameObject); //yolunu bitirince kendini yok ediyor
-        gameObject.SetActive(false);
-        //transform.localPosition = Vector3.zero;
+        FinishPath();
     }
 
 
