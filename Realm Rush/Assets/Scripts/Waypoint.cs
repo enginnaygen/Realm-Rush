@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waypoint : MonoBehaviour
+public class Waypoint : MonoBehaviour //burada tower(balista) olusturuluyor
 {
 
     [SerializeField] bool isPlacable;
-    [SerializeField] GameObject balista;
+    [SerializeField] Balista balista;
 
     public bool IsPlacable { get { return isPlacable; }} //bilgisi donulen property 
 
@@ -14,8 +14,8 @@ public class Waypoint : MonoBehaviour
     {
         if(isPlacable)
         {
-            Instantiate(balista, transform.position, Quaternion.identity);
-            isPlacable = false;
+            bool isPlaced = balista.InstantiateTower(balista, transform);
+            isPlacable = !isPlaced; 
 
         }
 

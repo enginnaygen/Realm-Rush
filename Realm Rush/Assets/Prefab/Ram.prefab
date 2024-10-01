@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  speed: 1.5
+  speed: 1
 --- !u!65 &1899053846372164715
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d763d7248b7be3b4d8696e02e8137515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goldReward: 25
+  goldPenalty: 25
 --- !u!1 &4969217214318913843
 GameObject:
   m_ObjectHideFlags: 0

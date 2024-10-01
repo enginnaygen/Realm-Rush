@@ -23,5 +23,10 @@ public class Bank : MonoBehaviour
     public void Withdraw(int amount)
     {
         currentBalance -= amount;
+
+        if(currentBalance<0)
+        {
+            Debug.Log("Lose Game");
+        }
     }
 }
