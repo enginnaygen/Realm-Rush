@@ -17,6 +17,7 @@ public class TargetLocator : MonoBehaviour
     void FindClosestTarget()
     {
         Enemy[] enemies =  FindObjectsOfType<Enemy>();
+        if (enemies == null) return;
         Transform closestTarget = null;
         float maxDistance = Mathf.Infinity;
 
