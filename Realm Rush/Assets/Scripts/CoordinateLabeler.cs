@@ -9,17 +9,18 @@ public class CoordinateLabeler : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.black;
     [SerializeField] Color blockedColor = Color.grey;
-
+    [SerializeField] Color exoloredColor = Color.yellow;
+    [SerializeField] Color pathColor = Color.red;
 
     TextMeshPro label;
     Vector2Int coordinates = new Vector2Int();
-    Waypoint waypoint;
+    GridManager gridManager;
 
     private void Awake()
     {
         label = GetComponent<TextMeshPro>();
         label.enabled = false;
-        waypoint = GetComponentInParent<Waypoint>();
+        gridManager = FindObjectOfType<GridManager>();
         DisplayCoordinates();
         UpdateObjectName();
     }
@@ -46,13 +47,27 @@ public class CoordinateLabeler : MonoBehaviour
 
     void SetLabelColor()
     {
-        if(waypoint.IsPlacable)
+        if (gridManager == null) return;
+
+        Node node = gridManager.GetNode(coordinates);
+
+        if (node == null) return;
+
+       if(!node.isWalkable)
         {
-            label.color = defaultColor;
+            label.color = blockedColor;
+        }      
+       else if(node.isPath)
+        {
+            label.color = pathColor;
+        }
+        else if (node.isExplored)
+        {
+            label.color = exoloredColor;
         }
         else
         {
-            label.color = blockedColor;
+            label.color = defaultColor;
         }
     }
 
