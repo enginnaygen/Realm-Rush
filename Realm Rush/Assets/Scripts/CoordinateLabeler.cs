@@ -9,7 +9,7 @@ public class CoordinateLabeler : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.black;
     [SerializeField] Color blockedColor = Color.grey;
-    [SerializeField] Color exoloredColor = Color.yellow;
+    [SerializeField] Color exploredColor = Color.yellow;
     [SerializeField] Color pathColor = Color.red;
 
     TextMeshPro label;
@@ -53,17 +53,17 @@ public class CoordinateLabeler : MonoBehaviour
 
         if (node == null) return;
 
-       if(!node.isWalkable)
+        if(!node.isWalkable)
         {
             label.color = blockedColor;
         }      
-       else if(node.isPath)
+        else if(node.isPath)
         {
             label.color = pathColor;
         }
         else if (node.isExplored)
         {
-            label.color = exoloredColor;
+            label.color = exploredColor;
         }
         else
         {
