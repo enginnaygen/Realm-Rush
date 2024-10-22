@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Pathfinder : MonoBehaviour
 {
+    [SerializeField] Vector2Int startCoordinates;
+    [SerializeField] Vector2Int destinationCoordinates; //end coordinates
 
-    [SerializeField] Node currentSearchNode;
+    Node startNode;
+    Node destinationNode;
+    Node currentSearchNode;
+
+    Queue<Node> frontier = new Queue<Node>();
+    Dictionary<Vector2Int, Node> reached = new Dictionary<Vector2Int, Node>();
+
     Vector2Int[] directions = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down};
-
     GridManager gridManager;
-    Dictionary<Vector2Int, Node> grid;
+    Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
 
     private void Awake()
     {
@@ -19,10 +26,13 @@ public class Pathfinder : MonoBehaviour
         {
             grid = gridManager.Grid;
         }
+
+        startNode = new Node(startCoordinates, true);
+        destinationNode = new Node(destinationCoordinates, true);
     }
     void Start()
     {
-        ExploreNeighbors();
+        BreadthFirstSearch();
     }
 
     void ExploreNeighbors()
@@ -36,14 +46,36 @@ public class Pathfinder : MonoBehaviour
 
           if(grid.ContainsKey(neighborCoordinates))
             {
-                neighbors.Add(grid[neighborCoordinates]);
-                grid[neighborCoordinates].isExplored = true;
-                grid[currentSearchNode.coordinates].isPath = true;
+                neighbors.Add(grid[neighborCoordinates]); //eger neighbour gridde varsa neighbors'a ekle
             }
+        }
 
-            //neighbors.Add(direction);
+        foreach(Node neighbour in neighbors)
+        {   //her ulasilan yer bir kere algoritma agacinda olmali, yani reached ise eklenmemeli
+            if (!reached.ContainsKey(neighbour.coordinates) && neighbour.isWalkable)
+            {
+                reached.Add(neighbour.coordinates, neighbour);
+                frontier.Enqueue(neighbour);
+            }
+        }
+    }
 
+    void BreadthFirstSearch()
+    {
+        bool isRunning = true;
 
+        frontier.Enqueue(startNode);
+        reached.Add(startCoordinates, startNode);
+
+        while(frontier.Count > 0 && isRunning)
+        {
+            currentSearchNode = frontier.Dequeue(); //frontierin ilk degerini listeden cikartiyor ve currentSN'u cikan degere esitliyor
+            currentSearchNode.isExplored = true;
+            ExploreNeighbors();
+            if(currentSearchNode.coordinates == destinationCoordinates)
+            {
+                isRunning = false;
+            }
         }
     }
 

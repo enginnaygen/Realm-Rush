@@ -13,16 +13,16 @@ public class CoordinateLabeler : MonoBehaviour
     [SerializeField] Color pathColor = Color.red;
 
     TextMeshPro label;
-    Vector2Int coordinates = new Vector2Int();
-    GridManager gridManager;
+    Vector2Int coordinates = new Vector2Int(); // 1)burada coordinate olusturduk, bunun degerlerini DisplayCoordinates fonksiyonunda
+    GridManager gridManager;                                                                                            //atadik
 
     private void Awake()
     {
+        gridManager = FindObjectOfType<GridManager>();
         label = GetComponent<TextMeshPro>();
         label.enabled = false;
-        gridManager = FindObjectOfType<GridManager>();
         DisplayCoordinates();
-        UpdateObjectName();
+        //UpdateObjectName();
     }
     void Update()
     {
@@ -30,6 +30,7 @@ public class CoordinateLabeler : MonoBehaviour
         {
             DisplayCoordinates();
             UpdateObjectName();
+            label.enabled = true;
         }
 
         SetLabelColor();
@@ -49,7 +50,7 @@ public class CoordinateLabeler : MonoBehaviour
     {
         if (gridManager == null) return;
 
-        Node node = gridManager.GetNode(coordinates);
+        Node node = gridManager.GetNode(coordinates); //2) ve burada coordinate degeriyle eslesen Node'u cagirdik
 
         if (node == null) return;
 
@@ -71,7 +72,7 @@ public class CoordinateLabeler : MonoBehaviour
         }
     }
 
-    private void DisplayCoordinates()
+    private void DisplayCoordinates()  
     {
         coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
