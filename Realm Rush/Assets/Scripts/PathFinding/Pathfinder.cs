@@ -27,12 +27,15 @@ public class Pathfinder : MonoBehaviour
             grid = gridManager.Grid;
         }
 
-        startNode = new Node(startCoordinates, true);
-        destinationNode = new Node(destinationCoordinates, true);
+        
     }
     void Start()
     {
+        startNode = gridManager.Grid[startCoordinates];
+        destinationNode = gridManager.Grid[destinationCoordinates];
+
         BreadthFirstSearch();
+        BuildPath();
     }
 
     void ExploreNeighbors()
@@ -51,9 +54,10 @@ public class Pathfinder : MonoBehaviour
         }
 
         foreach(Node neighbour in neighbors)
-        {   //her ulasilan yer bir kere algoritma agacinda olmali, yani reached ise eklenmemeli
+        {   //her ulasilan yer bir kere algoritma agacinda olmali, yani reached ise eklenmemeli, eklenen bir daha connectedTo olamýyor yani tek bir Node a baglaniyor
             if (!reached.ContainsKey(neighbour.coordinates) && neighbour.isWalkable)
             {
+                neighbour.connetedTo = currentSearchNode; //tum komsularý tek bir node a bagliyor
                 reached.Add(neighbour.coordinates, neighbour);
                 frontier.Enqueue(neighbour);
             }
@@ -77,6 +81,26 @@ public class Pathfinder : MonoBehaviour
                 isRunning = false;
             }
         }
+    }
+
+    List<Node> BuildPath() 
+    {
+        List<Node> path = new List<Node>();
+        Node currentNode = destinationNode; //tersten baslayip basa dogru gidiyoruz
+
+        path.Add(currentNode);
+        currentNode.isPath = true;
+
+        while(currentNode.connetedTo != null)
+        {
+            currentNode = currentNode.connetedTo;
+            path.Add(currentNode);
+            currentNode.isPath = true;
+        }
+
+        path.Reverse();
+
+        return path;
     }
 
 
