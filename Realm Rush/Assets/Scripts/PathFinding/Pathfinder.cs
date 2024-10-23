@@ -34,8 +34,13 @@ public class Pathfinder : MonoBehaviour
         startNode = gridManager.Grid[startCoordinates];
         destinationNode = gridManager.Grid[destinationCoordinates];
 
+        GetNewPath();
+    }
+
+    public List<Node> GetNewPath()
+    {
         BreadthFirstSearch();
-        BuildPath();
+        return BuildPath();
     }
 
     void ExploreNeighbors()
@@ -57,7 +62,7 @@ public class Pathfinder : MonoBehaviour
         {   //her ulasilan yer bir kere algoritma agacinda olmali, yani reached ise eklenmemeli, eklenen bir daha connectedTo olamýyor yani tek bir Node a baglaniyor
             if (!reached.ContainsKey(neighbour.coordinates) && neighbour.isWalkable)
             {
-                neighbour.connetedTo = currentSearchNode; //tum komsularý tek bir node a bagliyor
+                neighbour.connetedTo = currentSearchNode; //tum komsularý tek bir node a bagliyor, node a baglama islemleri burada oluyor
                 reached.Add(neighbour.coordinates, neighbour);
                 frontier.Enqueue(neighbour);
             }
@@ -66,6 +71,9 @@ public class Pathfinder : MonoBehaviour
 
     void BreadthFirstSearch()
     {
+        frontier.Clear();
+        reached.Clear();
+
         bool isRunning = true;
 
         frontier.Enqueue(startNode);
