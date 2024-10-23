@@ -7,13 +7,17 @@ public class Tile : MonoBehaviour //burada tower(balista) olusturuluyor
 
     [SerializeField] bool isPlacable;
     [SerializeField] Balista balista;
+
     GridManager gridManager;
+    Pathfinder pathFinder;
+
     Vector2Int coordinates = new Vector2Int();
     public bool IsPlacable { get { return isPlacable; }} //bilgisi donulen property 
 
     private void Awake()
     {
         gridManager = FindObjectOfType<GridManager>();
+        pathFinder = FindObjectOfType<Pathfinder>();
     }
 
     private void Start()
@@ -30,10 +34,11 @@ public class Tile : MonoBehaviour //burada tower(balista) olusturuluyor
     }
     private void OnMouseDown()
     {
-        if(isPlacable)
+        if (gridManager.GetNode(coordinates).isWalkable && !pathFinder.WillBlockPath(coordinates))
         {
             bool isPlaced = balista.InstantiateTower(balista, transform);
-            isPlacable = !isPlaced; 
+            isPlacable = !isPlaced;
+            gridManager.BlockNode(coordinates);
 
         }
 
