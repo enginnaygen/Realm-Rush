@@ -5,7 +5,11 @@ using UnityEngine;
 public class Pathfinder : MonoBehaviour
 {
     [SerializeField] Vector2Int startCoordinates;
+    public Vector2Int StartCoordinates { get { return startCoordinates; } }
+
     [SerializeField] Vector2Int destinationCoordinates; //end coordinates
+    public Vector2Int DestinationCoordinates { get { return destinationCoordinates; } }
+
 
     Node startNode;
     Node destinationNode;
@@ -25,15 +29,16 @@ public class Pathfinder : MonoBehaviour
         if(gridManager != null)
         {
             grid = gridManager.Grid;
+            startNode = grid[startCoordinates];
+            destinationNode = grid[destinationCoordinates];
+            
         }
 
         
     }
     void Start()
     {
-        startNode = gridManager.Grid[startCoordinates];
-        destinationNode = gridManager.Grid[destinationCoordinates];
-
+ 
         GetNewPath();
     }
 
@@ -48,7 +53,7 @@ public class Pathfinder : MonoBehaviour
     {
         List<Node> neighbors = new List<Node>();
 
-        foreach (Vector2Int direction in directions)
+        foreach (Vector2Int direction in directions) //currentSearchNoda'a komsularini ekliyoruz
         {
 
             Vector2Int neighborCoordinates = currentSearchNode.coordinates + direction;
@@ -72,6 +77,9 @@ public class Pathfinder : MonoBehaviour
 
     void BreadthFirstSearch()
     {
+        startNode.isWalkable = true;
+        destinationNode.isWalkable = true;
+
         frontier.Clear();
         reached.Clear();
 
@@ -82,7 +90,7 @@ public class Pathfinder : MonoBehaviour
 
         while(frontier.Count > 0 && isRunning)
         {
-            currentSearchNode = frontier.Dequeue(); //frontierin ilk degerini listeden cikartiyor ve currentSN'u cikan degere esitliyor
+            currentSearchNode = frontier.Dequeue(); //frontierin ilk degerini listeden cikartiyor ve currentSearchNode'u cikan degere esitliyor
             currentSearchNode.isExplored = true;
             ExploreNeighbors();
             if(currentSearchNode.coordinates == destinationCoordinates)
@@ -92,7 +100,7 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
-    List<Node> BuildPath() 
+    List<Node> BuildPath() //sondan basa dogru yolu ciziyor
     {
         List<Node> path = new List<Node>();
         Node currentNode = destinationNode; //tersten baslayip basa dogru gidiyoruz
@@ -107,21 +115,22 @@ public class Pathfinder : MonoBehaviour
             currentNode.isPath = true;
         }
 
-        path.Reverse();
+        path.Reverse(); //burada tersten basladigimiz path i bastan sona sekilde ceviriyoruz
 
         return path;
     }
 
-    public bool WillBlockPath(Vector2Int coordinates) //starttan destinationa yol varsa bloklamýyor
-    {                                                 //yoksa false donuyor 
+
+    public bool WillBlockPath(Vector2Int coordinates) //starttan destinationa yol yoksa blokluyor, true donuyor
+    {                                                 //yol varsa false donuyor, blocklamýyor, sadece kontrol yapiliyor, degisiklik yapilmiyor
         if(grid.ContainsKey(coordinates))
         {
             bool previousState = grid[coordinates].isWalkable;
-            grid[coordinates].isWalkable = false;
-            List<Node> newPath = GetNewPath();
-            grid[coordinates].isWalkable = previousState;
+            grid[coordinates].isWalkable = false; //burayi false yapiyoruz sadece burasi false olursa yol kapaniyor mu diye kontrol etmek icin
+            List<Node> newPath = GetNewPath(); //argumani verilen kordinatin isWalkable false olursa yolun nasil olacagini buluyor, yol bulamazsa oluyor o da sadece destination tile ý
+            grid[coordinates].isWalkable = previousState; //burada tekrar kordinatin isWalkable ýný eski haline donduruyor
 
-            if(newPath.Count <=1)
+            if(newPath.Count <=1) //new path olusmuyorsa koymayi engelliyor yani buradaki if e giriyor
             {
                 GetNewPath();
                 return true;

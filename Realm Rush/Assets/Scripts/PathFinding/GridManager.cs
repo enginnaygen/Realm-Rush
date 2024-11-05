@@ -12,7 +12,7 @@ public class GridManager : MonoBehaviour
 
 
     Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
-    public Dictionary<Vector2Int, Node> Grid { get { return grid; } }
+    public Dictionary<Vector2Int, Node> Grid { get { return grid; } } //tum gride (tum node a) ulasmak icin
 
 
     private void Awake()
@@ -20,7 +20,7 @@ public class GridManager : MonoBehaviour
         CreateGrid();
     }
 
-    public Node GetNode(Vector2Int coordinates)
+    public Node GetNode(Vector2Int coordinates) //belli bir node a ulasmak icin
     {
         if (grid.ContainsKey(coordinates))
         {

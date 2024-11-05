@@ -8,7 +8,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] [Range(0,50)] int poolSize = 5;
     [SerializeField] [Range(0.5f, 20)] float spawnTimer = 1f;
 
-    [SerializeField] GameObject[] pool;
+    GameObject[] pool;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class ObjectPool : MonoBehaviour
     }
     void Start()
     {
-        StartCoroutine("SpawnEnemy");
+        StartCoroutine(SpawnEnemy());
     }
 
     void PopulatePool()
@@ -35,7 +35,7 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < pool.Length; i++)
         {
-            if (!pool[i].activeInHierarchy)
+            if (pool[i].activeInHierarchy == false)
             {
                 pool[i].SetActive(true);
                 return;
