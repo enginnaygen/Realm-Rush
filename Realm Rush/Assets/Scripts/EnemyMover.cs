@@ -50,7 +50,7 @@ public class EnemyMover : MonoBehaviour
     }
     IEnumerator FallowPath()
     {
-        for(int i = 0; path.Count < 0; i++)
+        for(int i = 0; i < path.Count; i++)
         {
             Vector3 startPos = transform.position;
             Vector3 endPos = gridManager.GetPositionFromCoordinates(path[i].coordinates);
