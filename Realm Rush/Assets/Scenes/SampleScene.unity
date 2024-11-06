@@ -9371,7 +9371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 3948230604937850808, guid: a491fa7956cc6f04396a797af9b7beb9, type: 3}
   poolSize: 5
-  spawnTimer: 1
+  spawnTimer: 2.5
 --- !u!4 &893683494
 Transform:
   m_ObjectHideFlags: 0
@@ -21459,7 +21459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1ca2a39656c14438196b024c8a682c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: {x: 10, y: 10}
+  gridSize: {x: 8, y: 8}
   unityGridSize: 10
 --- !u!4 &2017234660
 Transform:
