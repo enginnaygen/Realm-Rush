@@ -36,9 +36,13 @@ public class Tile : MonoBehaviour //burada tower(balista) olusturuluyor
     {
         if (gridManager.GetNode(coordinates).isWalkable && !pathFinder.WillBlockPath(coordinates))
         {
-            bool isPlaced = balista.InstantiateTower(balista, transform);
-            isPlacable = !isPlaced;
-            gridManager.BlockNode(coordinates);
+            bool isSuccesful = balista.InstantiateTower(balista, transform);
+
+            if(isSuccesful)
+            {
+                gridManager.BlockNode(coordinates);
+                pathFinder.NotifyReciever();
+            }
 
         }
 
