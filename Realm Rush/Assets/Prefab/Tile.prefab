@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8969642319568440728}
   - component: {fileID: 964930006430903688}
   - component: {fileID: 406621452355349720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 2845296394291894327}
   - component: {fileID: 1129183746584863101}
   - component: {fileID: 4507558434353628649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 5711373459919901337}
   - component: {fileID: 6214233545461358815}
   - component: {fileID: 3803294969326675982}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
