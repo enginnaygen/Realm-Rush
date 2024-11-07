@@ -16,9 +16,8 @@ public class EnemyMover : MonoBehaviour
 
     void OnEnable()
     {
-        RecalculatePath();
         ReturnToStart();
-        StartCoroutine(FallowPath());
+        RecalculatePath(true);      
     }
 
     private void Awake()
@@ -35,10 +34,23 @@ public class EnemyMover : MonoBehaviour
         transform.position = gridManager.GetPositionFromCoordinates(pathFinder.StartCoordinates);
     }
 
-    void RecalculatePath()
+    void RecalculatePath(bool resetPath)
     {
+        Vector2Int coordinates = new Vector2Int();
+
+        if(resetPath)
+        {
+            coordinates = pathFinder.StartCoordinates;
+        }
+        else
+        {
+            coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
+        }
+        StopAllCoroutines();
         path.Clear();
-        path = pathFinder.GetNewPath();
+        path = pathFinder.GetNewPath(coordinates);
+        StartCoroutine(FallowPath());
+
     }
 
 
@@ -50,7 +62,7 @@ public class EnemyMover : MonoBehaviour
     }
     IEnumerator FallowPath()
     {
-        for(int i = 0; i < path.Count; i++)
+        for(int i = 1; i < path.Count; i++)
         {
             Vector3 startPos = transform.position;
             Vector3 endPos = gridManager.GetPositionFromCoordinates(path[i].coordinates);
