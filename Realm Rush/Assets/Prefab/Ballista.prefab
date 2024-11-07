@@ -231,6 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balistaCost: 50
+  topBalista: {fileID: 4086720679825974441}
+  baseBalista: {fileID: 4075510949599790312}
 --- !u!1 &5344846439736784401
 GameObject:
   m_ObjectHideFlags: 0
