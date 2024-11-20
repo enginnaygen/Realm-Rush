@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 public class Bank : MonoBehaviour
 {
     [SerializeField] int startingBalance;
@@ -31,7 +32,7 @@ public class Bank : MonoBehaviour
         UpdateGoldDisplay();
         if (currentBalance<0)
         {
-            Debug.Log("Lose Game");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
